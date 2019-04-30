@@ -3,9 +3,14 @@ package com.thoughtworks;
 import java.util.List;
 
 public class Group {
-    public Group(List<Expense> expensedsList, List<Friend> secondFriendList) {
+
+    public void settlingUpInitiation(List<Expense> expensesList, List<Friend> allFriendList) {
+        for (Expense eachExpense : expensesList) {
+                eachExpense.evenSplit(eachExpense, eachExpense.sponsorName, eachExpense.personList);
+        }
+        settleUpAmountOfEachUser(allFriendList);
     }
 
-    public void settlingUpInitiation(List<Expense> expensedsList, List<Friend> secondFriendList) {
+    private void settleUpAmountOfEachUser(List<Friend> allFriendList) {
     }
 }

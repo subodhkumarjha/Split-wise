@@ -53,7 +53,7 @@ public class GroupTest {
         secondFriendList.add(secondFriendName);
         secondFriendList.add(fourthFriendName);
         secondFriendList.add(thirdFriendName);
-        Group group = new Group(expensedsList, secondFriendList);
+        Group group = new Group();
 
         group.settlingUpInitiation(expensedsList,secondFriendList);
 
