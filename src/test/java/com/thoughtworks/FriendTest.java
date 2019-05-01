@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendTest {
+class FriendTest {
     private Friend firstUserName;
     private Friend secondUserName;
     private Friend thirdUserName;
@@ -49,5 +49,24 @@ public class FriendTest {
         secondUserList.add(thirdUserName);
 
         Assertions.assertEquals(fourthUserName.requiredPersonAmount(), firstUserName.maximumDebtAmountOfUser(secondUserList).requiredPersonAmount());
+    }
+
+    @Test
+    @DisplayName("Checking the sponsorName who receives maximum amount")
+    void checkingTheUserWhoReceivesMaximumAmount() {
+        firstUserName = new Friend("A", 30);
+        secondUserName = new Friend("B", 30);
+        thirdUserName = new Friend("C", -20);
+        fourthUserName = new Friend("D", -35);
+
+        secondUserList = new ArrayList<>();
+        secondUserList.add(firstUserName);
+        secondUserList.add(secondUserName);
+        secondUserList.add(fourthUserName);
+        secondUserList.add(thirdUserName);
+
+        Assertions.assertEquals(secondUserName.requiredPersonAmount(), secondUserName.maximumAmountOfThePerson(secondUserList).requiredPersonAmount());
+
+        Assertions.assertEquals(30, firstUserName.requiredPersonAmount());
     }
 }

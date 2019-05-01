@@ -2,20 +2,24 @@ package com.thoughtworks;
 
 import java.util.List;
 
-public class Friend {
-    public Friend(String a, int i) {
+class Friend {
+    private String name;
+    double amount;
 
+    Friend(String name, int amount) {
+        this.name = name;
+        this.amount = amount;
     }
 
-    public int requiredPersonAmount() {
+    int requiredPersonAmount() {
         return 0;
     }
 
-    public Friend maximumDebtAmountOfUser(List<Friend> secondUserList) {
+    Friend maximumDebtAmountOfUser(List<Friend> secondUserList) {
         return null;
     }
 
-    public Friend maximumAmountOfThePerson(List<Friend> allFriendList) {
+    Friend maximumAmountOfThePerson(List<Friend> allFriendList) {
         return null;
     }
 }

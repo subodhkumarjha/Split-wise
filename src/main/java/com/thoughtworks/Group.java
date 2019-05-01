@@ -2,11 +2,11 @@ package com.thoughtworks;
 
 import java.util.List;
 
-public class Group {
+class Group {
 
-    public void settlingUpInitiation(List<Expense> expensesList, List<Friend> allFriendList) {
+    void settlingUpInitiation(List<Expense> expensesList, List<Friend> allFriendList) {
         for (Expense eachExpense : expensesList) {
-                eachExpense.evenSplit(eachExpense, eachExpense.sponsorName, eachExpense.personList);
+            eachExpense.evenSplit(eachExpense, eachExpense.sponsorName, eachExpense.personList);
         }
         settleUpAmountOfEachUser(allFriendList);
     }
@@ -27,7 +27,7 @@ public class Group {
     }
 
     private Double findMinimumValue(int i, int requiredPersonAmount) {
-        return  0.0;
+        return 0.0;
     }
 
     private boolean isExpenseSettled(int requiredPersonAmount, int requiredPersonAmount1) {

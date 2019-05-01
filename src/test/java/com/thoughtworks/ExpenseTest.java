@@ -6,43 +6,42 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class ExpenseTest {
-        private Friend firstUserName;
-        private Friend secondUserName;
-        private Friend thirdUserName;
-        private Friend fourthUserName;
-        private List<Friend> firstGroupList;
-        private List<Friend> secondGroupList;
-        private List<Friend> thirdGroupList;
-        private List<Friend> fourthGroupList;
+    private Friend firstUserName;
+    private Friend secondUserName;
+    private Friend thirdUserName;
+    private Friend fourthUserName;
+    private List<Friend> firstGroupList;
+    private List<Friend> secondGroupList;
+    private List<Friend> thirdGroupList;
+    private List<Friend> fourthGroupList;
 
-        @BeforeEach
-        void setup() {
-            firstUserName = new Friend("A", 0);
-            secondUserName = new Friend("B", 0);
-            thirdUserName = new Friend("C", 0);
-            fourthUserName = new Friend("D", 0);
-            firstGroupList = new ArrayList<>();
-            firstGroupList.add(firstUserName);
-            firstGroupList.add(secondUserName);
-            firstGroupList.add(thirdUserName);
-            firstGroupList.add(fourthUserName);
+    @BeforeEach
+    void setup() {
+        firstUserName = new Friend("A", 0);
+        secondUserName = new Friend("B", 0);
+        thirdUserName = new Friend("C", 0);
+        fourthUserName = new Friend("D", 0);
+        firstGroupList = new ArrayList<>();
+        firstGroupList.add(firstUserName);
+        firstGroupList.add(secondUserName);
+        firstGroupList.add(thirdUserName);
+        firstGroupList.add(fourthUserName);
 
-            secondGroupList = new ArrayList<>();
-            secondGroupList.add(thirdUserName);
-            secondGroupList.add(fourthUserName);
+        secondGroupList = new ArrayList<>();
+        secondGroupList.add(thirdUserName);
+        secondGroupList.add(fourthUserName);
 
-            thirdGroupList = new ArrayList<>();
-            thirdGroupList.add(firstUserName);
-            thirdGroupList.add(secondUserName);
+        thirdGroupList = new ArrayList<>();
+        thirdGroupList.add(firstUserName);
+        thirdGroupList.add(secondUserName);
 
-            fourthGroupList = new ArrayList<>();
-            fourthGroupList.add(firstUserName);
-            fourthGroupList.add(secondUserName);
-        }
+        fourthGroupList = new ArrayList<>();
+        fourthGroupList.add(firstUserName);
+        fourthGroupList.add(secondUserName);
+    }
 
 
     @Test
@@ -50,7 +49,7 @@ class ExpenseTest {
     void afterCalculationOfSnacksExpenseCGives25toOthers() {
         Expense firstExpense = new Expense(firstUserName, 100, firstGroupList);
 
-        firstExpense.evenSplit(firstExpense ,firstUserName , firstGroupList);
+        firstExpense.evenSplit(firstExpense, firstUserName, firstGroupList);
 
         Assertions.assertEquals(-25, thirdUserName.requiredPersonAmount());
     }
@@ -59,7 +58,7 @@ class ExpenseTest {
     @DisplayName("B should not get 75 after settling up the Amount of snacks with even Splits")
     void settleUpAmountAfterCalculationOfExpensesBShouldNotGets75FromOthersWithEvenSplits() {
         Expense firstExpense = new Expense(secondUserName, 120, firstGroupList);
-        firstExpense.evenSplit(firstExpense,secondUserName,firstGroupList);
+        firstExpense.evenSplit(firstExpense, secondUserName, firstGroupList);
 
         Assertions.assertNotEquals(75, secondUserName.requiredPersonAmount());
     }
@@ -69,7 +68,7 @@ class ExpenseTest {
     @DisplayName("B gets 75 after settling up the Amount of snacks with even Splits")
     void settleUpAmountAfterCalculationOfExpensesBGets75FromOthersWithEvenSplits() {
         Expense firstExpense = new Expense(secondUserName, 100, firstGroupList);
-        firstExpense.evenSplit(firstExpense,secondUserName,firstGroupList);
+        firstExpense.evenSplit(firstExpense, secondUserName, firstGroupList);
 
         Assertions.assertEquals(75, secondUserName.requiredPersonAmount());
     }

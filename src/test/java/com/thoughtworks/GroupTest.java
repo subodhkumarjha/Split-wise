@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupTest {
+class GroupTest {
     private Friend firstFriendName;
     private Friend secondFriendName;
     private Friend thirdFriendName;
@@ -55,7 +55,7 @@ public class GroupTest {
         secondFriendList.add(thirdFriendName);
         Group group = new Group();
 
-        group.settlingUpInitiation(expensedsList,secondFriendList);
+        group.settlingUpInitiation(expensedsList, secondFriendList);
 
         Assertions.assertEquals(0, firstFriendName.requiredPersonAmount());
     }
