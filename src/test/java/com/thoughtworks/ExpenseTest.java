@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 class ExpenseTest {
@@ -53,5 +54,25 @@ class ExpenseTest {
 
         Assertions.assertEquals(-25, thirdUserName.requiredPersonAmount());
     }
+
+    @Test
+    @DisplayName("B should not get 75 after settling up the Amount of snacks with even Splits")
+    void settleUpAmountAfterCalculationOfExpensesBShouldNotGets75FromOthersWithEvenSplits() {
+        Expense firstExpense = new Expense(secondUserName, 120, firstGroupList);
+        firstExpense.evenSplit(firstExpense,secondUserName,firstGroupList);
+
+        Assertions.assertNotEquals(75, secondUserName.requiredPersonAmount());
+    }
+
+
+    @Test
+    @DisplayName("B gets 75 after settling up the Amount of snacks with even Splits")
+    void settleUpAmountAfterCalculationOfExpensesBGets75FromOthersWithEvenSplits() {
+        Expense firstExpense = new Expense(secondUserName, 100, firstGroupList);
+        firstExpense.evenSplit(firstExpense,secondUserName,firstGroupList);
+
+        Assertions.assertEquals(75, secondUserName.requiredPersonAmount());
+    }
+
 
 }
