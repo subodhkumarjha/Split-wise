@@ -3,34 +3,51 @@ package com.thoughtworks;
 import java.util.List;
 
 class Group {
+    List<Expense> expensesList;
+    Transactions transactions;
 
-    void settlingUpInitiation(List<Expense> expensesList, List<Friend> allFriendList) {
-        for (Expense eachExpense : expensesList) {
-            eachExpense.evenSplit(eachExpense, eachExpense.sponsorName, eachExpense.personList);
-        }
-        settleUpAmountOfEachUser(allFriendList);
+    Group (List<Expense> expensesList) {
+        this.expensesList = expensesList;
+        this.transactions = new Transactions ();
     }
 
-    private void settleUpAmountOfEachUser(List<Friend> allFriendList) {
-        for (Friend user : allFriendList) {
-            Friend maximumDebtAmountUser = user.maximumDebtAmountOfUser(allFriendList);
-            Friend maximumTakeableAmountUser = user.maximumAmountOfThePerson(allFriendList);
-            if (isExpenseSettled(maximumDebtAmountUser.requiredPersonAmount(), maximumTakeableAmountUser.requiredPersonAmount())) {
+    void settlingUpInitiation (List<Expense> expensesList, List<User> allUserList) {
+        for (Expense eachExpense : expensesList) {
+            eachExpense.evenSplit (eachExpense, eachExpense.sponsorName, eachExpense.personList);
+        }
+        settleUpAmountOfEachUser (allUserList);
+    }
+
+    private void settleUpAmountOfEachUser (List<User> allUserList) {
+        for (User user : allUserList) {
+            User maximumDebtAmountUser = user.maximumDebtAmountOfUser (allUserList);
+            User maximumTakeableAmountUser = user.maximumAmountOfThePerson (allUserList);
+            if (isExpenseSettled (maximumDebtAmountUser.requiredPersonAmount (), maximumTakeableAmountUser.requiredPersonAmount ())) {
                 return;
             }
-            Double minimumValue = findMinimumValue(-maximumDebtAmountUser.requiredPersonAmount(), maximumTakeableAmountUser.requiredPersonAmount());
-            settlingUpAmountOfTwoUser(maximumDebtAmountUser, maximumTakeableAmountUser, minimumValue);
+            Double minimumValue = findMinimumValue (-maximumDebtAmountUser.requiredPersonAmount (), maximumTakeableAmountUser.requiredPersonAmount ());
+            Transaction transaction = new Transaction (maximumDebtAmountUser, maximumTakeableAmountUser, minimumValue);
+            transactions.addTransaction (transaction);
+            settlingUpAmountOfTwoUser (maximumDebtAmountUser, maximumTakeableAmountUser, minimumValue);
         }
     }
 
-    private void settlingUpAmountOfTwoUser(Friend maximumDebtAmountUser, Friend maximumTakeableAmountUser, Double maximumValue) {
+    private void settlingUpAmountOfTwoUser (User maximumDebtAmountUser, User maximumTakeableAmountUser, Double maximumValue) {
+        maximumDebtAmountUser.updateAmount (maximumValue);
+        maximumTakeableAmountUser.updateAmount (-maximumValue);
+
+        //maximumDebtAmountUser.amount += maximumValue;
+        //maximumTakeableAmountUser.amount -= maximumValue;
     }
 
-    private Double findMinimumValue(int i, int requiredPersonAmount) {
-        return 0.0;
+    private Double findMinimumValue (Double firstAmount, Double secondAmount) {
+        if (firstAmount > secondAmount) {
+            return secondAmount;
+        }
+        return firstAmount;
     }
 
-    private boolean isExpenseSettled(int requiredPersonAmount, int requiredPersonAmount1) {
-        return true;
+    private boolean isExpenseSettled (Double maximumDebtAmount, Double maximumTakeableAmount) {
+        return maximumDebtAmount == 0 && maximumTakeableAmount == 0;
     }
 }
