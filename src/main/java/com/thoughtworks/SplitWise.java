@@ -13,19 +13,28 @@ class SplitWise {
         List<User> secondUserList;
         List<User> thirdUserList;
         List<User> fourthUserList;
+        List<User> allUserList;
+
 
         firstUserName = new User ("A", 0);
         secondUserName = new User ("B", 0);
         thirdUserName = new User ("C", 0);
         fourthUserName = new User ("D", 0);
         firstUserList = new ArrayList<> ();
-        firstUserList.add (firstUserName);
+        //firstUserList.add (firstUserName);
         firstUserList.add (secondUserName);
         firstUserList.add (thirdUserName);
         firstUserList.add (fourthUserName);
 
+
+        allUserList = new ArrayList<> ();
+        allUserList.add (firstUserName);
+        allUserList.add (secondUserName);
+        allUserList.add (thirdUserName);
+        allUserList.add (fourthUserName);
+
         secondUserList = new ArrayList<> ();
-        secondUserList.add (thirdUserName);
+        //secondUserList.add (thirdUserName);
         secondUserList.add (fourthUserName);
 
         thirdUserList = new ArrayList<> ();
@@ -33,7 +42,7 @@ class SplitWise {
         thirdUserList.add (secondUserName);
 
         fourthUserList = new ArrayList<> ();
-        fourthUserList.add (firstUserName);
+        //fourthUserList.add (firstUserName);
         fourthUserList.add (secondUserName);
 
         List<Expense> expensesList = new ArrayList<> ();
@@ -50,8 +59,11 @@ class SplitWise {
 
         Group group = new Group (expensesList);
 
-        group.settlingUpInitiation (expensesList, firstUserList);
+        Transactions transactions = group.settlingUpInitiation (expensesList, allUserList);
+        System.out.println(ReaderFactory.getReader("CSV").read(transactions));
+        System.out.println(ReaderFactory.getReader("DB").read(transactions));
+        System.out.println(ReaderFactory.getReader("XML").read(transactions));
 
-        group.transactions.displayTransactions ();
+        // transactions.displayTransactions ();
     }
 }

@@ -13,10 +13,10 @@ class Expense {
         this.personList = personList;
     }
 
-    void evenSplit (Expense eachExpense, User sponsorName, List<User> personList) {
-        sponsorName.updateAmount (eachExpense.totalAmountPaid);
-        Double fractionShare = (double) 1 / personList.size ();
-        for (User groupMember : personList) {
+    void evenSplit () {
+        Double fractionShare = (double) 1 / (this.personList.size () + 1);
+        this.sponsorName.updateAmount (this.totalAmountPaid * (1.0 - fractionShare));
+        for (User groupMember : this.personList) {
             groupMember.updateAmount (-fractionShare * this.totalAmountPaid);
         }
     }

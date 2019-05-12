@@ -25,15 +25,10 @@ class ExpenseTest {
         secondUserName = new User ("B", 0);
         thirdUserName = new User ("C", 0);
         fourthUserName = new User ("D", 0);
-        firstGroupList = new ArrayList<> ();
-        firstGroupList.add (firstUserName);
-        firstGroupList.add (secondUserName);
-        firstGroupList.add (thirdUserName);
-        firstGroupList.add (fourthUserName);
+
 
         secondGroupList = new ArrayList<> ();
         secondGroupList.add (thirdUserName);
-        secondGroupList.add (fourthUserName);
 
         thirdGroupList = new ArrayList<> ();
         thirdGroupList.add (firstUserName);
@@ -48,8 +43,17 @@ class ExpenseTest {
     @DisplayName ("B gets 0 after calculation of snacks ,taxi , hotel and bus expenses")
     void afterCalculationOfExpensesBGets0FromOthers () {
         List<Expense> allExpensedsList = new ArrayList<> ();
+        firstGroupList = new ArrayList<> ();
+        firstGroupList.add (secondUserName);
+        firstGroupList.add (thirdUserName);
+        firstGroupList.add (fourthUserName);
         Expense firstExpense = new Expense (firstUserName, 100, firstGroupList);
+
         Expense secondExpense = new Expense (secondUserName, 10, secondGroupList);
+        firstGroupList = new ArrayList<> ();
+        firstGroupList.add (firstUserName);
+        firstGroupList.add (secondUserName);
+        firstGroupList.add (thirdUserName);
         Expense thirdExpense = new Expense (fourthUserName, 20, firstGroupList);
 
         allExpensedsList.add (firstExpense);
@@ -65,9 +69,13 @@ class ExpenseTest {
     @Test
     @DisplayName ("C gives 25  to others after calculation of even split for snacks")
     void afterCalculationOfSnacksExpenseCGives25toOthers () {
+        firstGroupList = new ArrayList<> ();
+        firstGroupList.add (secondUserName);
+        firstGroupList.add (thirdUserName);
+        firstGroupList.add (fourthUserName);
         Expense firstExpense = new Expense (firstUserName, 100, firstGroupList);
 
-        firstExpense.evenSplit (firstExpense, firstUserName, firstGroupList);
+        firstExpense.evenSplit ();
 
         Assertions.assertEquals (-25, thirdUserName.requiredPersonAmount ());
     }
@@ -75,8 +83,12 @@ class ExpenseTest {
     @Test
     @DisplayName ("B should not get 75 after settling up the Amount of snacks with even Splits")
     void settleUpAmountAfterCalculationOfExpensesBShouldNotGets75FromOthersWithEvenSplits () {
+        firstGroupList = new ArrayList<> ();
+        firstGroupList.add (firstUserName);
+        firstGroupList.add (thirdUserName);
+        firstGroupList.add (fourthUserName);
         Expense firstExpense = new Expense (secondUserName, 120, firstGroupList);
-        firstExpense.evenSplit (firstExpense, secondUserName, firstGroupList);
+        firstExpense.evenSplit ();
 
         Assertions.assertNotEquals (75, secondUserName.requiredPersonAmount ());
     }
@@ -85,8 +97,12 @@ class ExpenseTest {
     @Test
     @DisplayName ("B gets 75 after settling up the Amount of snacks with even Splits")
     void settleUpAmountAfterCalculationOfExpensesBGets75FromOthersWithEvenSplits () {
+        firstGroupList = new ArrayList<> ();
+        firstGroupList.add (firstUserName);
+        firstGroupList.add (thirdUserName);
+        firstGroupList.add (fourthUserName);
         Expense firstExpense = new Expense (secondUserName, 100, firstGroupList);
-        firstExpense.evenSplit (firstExpense, secondUserName, firstGroupList);
+        firstExpense.evenSplit ();
 
         Assertions.assertEquals (75, secondUserName.requiredPersonAmount ());
     }

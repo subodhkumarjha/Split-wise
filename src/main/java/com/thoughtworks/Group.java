@@ -4,32 +4,33 @@ import java.util.List;
 
 class Group {
     List<Expense> expensesList;
-    Transactions transactions;
+//    Transactions transactions;
 
     Group (List<Expense> expensesList) {
         this.expensesList = expensesList;
-        this.transactions = new Transactions ();
     }
 
-    void settlingUpInitiation (List<Expense> expensesList, List<User> allUserList) {
+    Transactions settlingUpInitiation (List<Expense> expensesList, List<User> allUserList) {
         for (Expense eachExpense : expensesList) {
-            eachExpense.evenSplit (eachExpense, eachExpense.sponsorName, eachExpense.personList);
+            eachExpense.evenSplit ();
         }
-        settleUpAmountOfEachUser (allUserList);
+      return  settleUpAmountOfEachUser (allUserList);
     }
 
-    private void settleUpAmountOfEachUser (List<User> allUserList) {
+    private Transactions settleUpAmountOfEachUser (List<User> allUserList) {
+        Transactions transactions = new Transactions ();
         for (User user : allUserList) {
             User maximumDebtAmountUser = user.maximumDebtAmountOfUser (allUserList);
             User maximumTakeableAmountUser = user.maximumAmountOfThePerson (allUserList);
             if (isExpenseSettled (maximumDebtAmountUser.requiredPersonAmount (), maximumTakeableAmountUser.requiredPersonAmount ())) {
-                return;
+                return transactions;
             }
             Double minimumValue = findMinimumValue (-maximumDebtAmountUser.requiredPersonAmount (), maximumTakeableAmountUser.requiredPersonAmount ());
             Transaction transaction = new Transaction (maximumDebtAmountUser, maximumTakeableAmountUser, minimumValue);
             transactions.addTransaction (transaction);
             settlingUpAmountOfTwoUser (maximumDebtAmountUser, maximumTakeableAmountUser, minimumValue);
         }
+        return transactions;
     }
 
     private void settlingUpAmountOfTwoUser (User maximumDebtAmountUser, User maximumTakeableAmountUser, Double maximumValue) {
