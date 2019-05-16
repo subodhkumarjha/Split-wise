@@ -17,7 +17,7 @@ class Transactions {
     void displayTransactions () {
         for (Transaction transaction : transactionList) {
             System.out.println ("Payer : " + transaction.payer.getName () + " " + transaction.amount + " Consumer : "
-                    + transaction.consumer.getName ());
+                    + transaction.payee.getName ());
         }
     }
 

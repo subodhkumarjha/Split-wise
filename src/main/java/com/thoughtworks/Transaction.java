@@ -2,12 +2,12 @@ package com.thoughtworks;
 
 class Transaction {
     User payer;
-    User consumer;
+    User payee;
     double amount;
 
     Transaction (User maximumDebtAmountUser, User maximumTakeableAmountUser, Double minimumValue) {
         this.payer = maximumDebtAmountUser;
-        this.consumer = maximumTakeableAmountUser;
+        this.payee = maximumTakeableAmountUser;
         this.amount = minimumValue;
     }
 }

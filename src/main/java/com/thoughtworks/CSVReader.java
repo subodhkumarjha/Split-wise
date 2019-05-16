@@ -22,7 +22,7 @@ public class CSVReader implements Reader {
                 sb.append (',');
                 sb.append (transaction.amount);
                 sb.append (',');
-                sb.append (transaction.consumer.getName ());
+                sb.append (transaction.payee.getName ());
                 sb.append ('\n');
             }
 

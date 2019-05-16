@@ -50,7 +50,7 @@ public class XMLReader implements Reader {
 
                 // Payee elements
                 Element payee = doc.createElement ("Payee");
-                payee.appendChild (doc.createTextNode (transaction.consumer.getName ()));
+                payee.appendChild (doc.createTextNode (transaction.payee.getName ()));
                 staff.appendChild (payee);
             }
 
